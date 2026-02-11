@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_nav_graph"
+    app:startDestination="@id/LoginFragment">
+
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.rj.helpdesk.auth.login.LoginFragment"
+        tools:layout="@layout/auth_login_fragment">
+
+        <action
+            android:id="@+id/action_LoginFragment_to_User_Dashboard_Fragment"
+            app:destination="@id/UserDashboardFragment" />
+        <action
+            android:id="@+id/action_LoginFragment_to_Admin_Dashboard_Fragment"
+            app:destination="@id/AdminDashboardFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/UserDashboardFragment"
+        tools:layout="@layout/user_dashboard_fragment">
+    </fragment>
+    <fragment
+        android:id="@+id/AdminDashboardFragment"
+        tools:layout="@layout/admin_dashboard_fragment">
+    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/UserDashboardFragment"-->
+<!--        android:name="com.rj.helpdesk.auth.login.SettingsFragment"-->
+<!--        android:label="@string/second_fragment_label"-->
+<!--        tools:layout="@layout/fragment_second">-->
+
+<!--        <action-->
+<!--            android:id="@+id/action_SecondFragment_to_FirstFragment"-->
+<!--            app:destination="@id/FirstFragment" />-->
+<!--    </fragment>-->
+</navigation>
