@@ -6,10 +6,12 @@ import android.view.MenuItem;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.rj.helpdesk.R;
+import com.rj.helpdesk.common.connections.auth.AuthConnectionManager;
+import com.rj.helpdesk.common.utils.PreferenceUtils;
 import com.rj.helpdesk.databinding.AuthLoginActivityBinding;
 import com.rj.helpdesk.databinding.AuthLoginContentBinding;
 
@@ -27,45 +29,76 @@ public class LoginActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-        View contentRoot = findViewById(R.id.nav_host_fragment_content_login).getParent() instanceof View ?
-                (View) findViewById(R.id.nav_host_fragment_content_login).getParent() : null;
 
-        if(contentRoot != null){
-            contentBinding = AuthLoginContentBinding.bind(contentRoot);
+        contentBinding = AuthLoginContentBinding.bind(binding.content.getRoot());
+
+        // Cargar API guardada usando Utils
+        String savedApi = PreferenceUtils.getApiUrl(this);
+        contentBinding.cardLoginSettings.editTextApi.setText(savedApi);
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment_content_login);
+        
+        if (navHostFragment != null) {
+            NavController navController = navHostFragment.getNavController();
+            appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         }
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_login);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        if(contentBinding!=null){
-            contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setOnClickListener(v -> {
-                contentBinding.commonGlobalMessage.cardGlobalMessage.setVisibility(View.GONE);
+
+        contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setOnClickListener(v -> {
+            contentBinding.commonGlobalMessage.cardGlobalMessage.setVisibility(View.GONE);
+        });
+
+        contentBinding.cardLoginSettings.buttonSaveLoginSettingsCard.setOnClickListener(v -> {
+            String apiUrl = contentBinding.cardLoginSettings.editTextApi.getText().toString();
+            PreferenceUtils.saveApiUrl(this, apiUrl);
+            AuthConnectionManager.testConnection(this,isSuccess -> {
+                if(isSuccess){
+                    showGlobalMessage("Éxito", "Configuración guardada y API online", "Cerrar");
+                    contentBinding.cardLoginSettings.cardLoginSettings.setVisibility(View.GONE);
+                }else{
+                    showGlobalMessage("Error", "API no disponible", "Cerrar");
+                }
             });
-        }
+        });
+        contentBinding.cardLoginSettings.buttonCloseLoginSettingsCard.setOnClickListener(v -> {
+           contentBinding.cardLoginSettings.cardLoginSettings.setVisibility(View.GONE);
+        });
     }
+
     public void showGlobalMessage(String title, String mssg, String close_name){
-        if(contentBinding!=null){
+        if(contentBinding != null){
             contentBinding.commonGlobalMessage.textGlobalTitle.setText(title);
             contentBinding.commonGlobalMessage.textGlobalBody.setText(mssg);
             contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setText(close_name);
             contentBinding.commonGlobalMessage.cardGlobalMessage.setVisibility(View.VISIBLE);
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id==R.id.action_settings){
+        if(id == R.id.action_settings){
+            contentBinding.cardLoginSettings.cardLoginSettings.setVisibility(View.VISIBLE);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public boolean onSupportNavigateUp(){
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_login);
-        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment_content_login);
+        if (navHostFragment != null) {
+            NavController navController = navHostFragment.getNavController();
+            return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
+        }
+        return super.onSupportNavigateUp();
     }
 }
