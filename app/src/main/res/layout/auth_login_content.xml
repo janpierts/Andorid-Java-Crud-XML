@@ -21,5 +21,8 @@
     <include
         android:id="@+id/common_global_message"
         layout="@layout/common_global_message" />
+    <include
+        android:id="@+id/card_login_settings"
+        layout="@layout/auth_login_settings"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

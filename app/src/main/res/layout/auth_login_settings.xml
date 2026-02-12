@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView android:id="@+id/card_global_message"
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/card_login_settings"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="32dp"
@@ -22,27 +23,53 @@
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/text_global_title"
+            android:id="@+id/login_settings_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¡Éxito!"
+            android:text="Api Settings"
+            android:layout_gravity="center"
             android:textColor="?attr/colorPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/text_global_body"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Contenido del mensaje." />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/api_text_container"
+            android:layout_width="280dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp">
+
+                <EditText
+                    android:id="@+id/editTextApi"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent"
+                    android:hint="API"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <Button
-            android:id="@+id/button_close_global_card"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:id="@+id/button_save_login_settings_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="Cerrar" />
+            android:layout_gravity="center"
+            android:text="Save"
+            app:icon="@android:drawable/ic_popup_sync" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
