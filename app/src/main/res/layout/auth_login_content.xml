@@ -19,10 +19,10 @@
         app:navGraph="@navigation/auth_nav_graph" />
 
     <include
-        android:id="@+id/common_global_message"
-        layout="@layout/common_global_message" />
-    <include
         android:id="@+id/card_login_settings"
         layout="@layout/auth_login_settings"/>
+    <include
+        android:id="@+id/common_global_message"
+        layout="@layout/common_global_message" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

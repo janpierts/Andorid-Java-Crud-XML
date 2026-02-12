@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.rj.helpdesk.R;
+import com.rj.helpdesk.common.connections.auth.AuthConnectionManager;
 import com.rj.helpdesk.common.utils.PreferenceUtils;
 import com.rj.helpdesk.databinding.AuthLoginActivityBinding;
 import com.rj.helpdesk.databinding.AuthLoginContentBinding;
@@ -51,7 +52,17 @@ public class LoginActivity extends AppCompatActivity {
         contentBinding.cardLoginSettings.buttonSaveLoginSettingsCard.setOnClickListener(v -> {
             String apiUrl = contentBinding.cardLoginSettings.editTextApi.getText().toString();
             PreferenceUtils.saveApiUrl(this, apiUrl);
-            contentBinding.cardLoginSettings.cardLoginSettings.setVisibility(View.GONE);
+            AuthConnectionManager.testConnection(this,isSuccess -> {
+                if(isSuccess){
+                    showGlobalMessage("Éxito", "Configuración guardada y API online", "Cerrar");
+                    contentBinding.cardLoginSettings.cardLoginSettings.setVisibility(View.GONE);
+                }else{
+                    showGlobalMessage("Error", "API no disponible", "Cerrar");
+                }
+            });
+        });
+        contentBinding.cardLoginSettings.buttonCloseLoginSettingsCard.setOnClickListener(v -> {
+           contentBinding.cardLoginSettings.cardLoginSettings.setVisibility(View.GONE);
         });
     }
 

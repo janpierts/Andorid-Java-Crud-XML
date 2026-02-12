@@ -13,9 +13,15 @@ public class PreferenceUtils {
         editor.putString(KEY_API_URL, apiUrl);
         editor.apply();
     }
-
     public static String getApiUrl(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_API_URL, "");
+    }
+    public static String getTrailingSlashIfNeeded(Context context) {
+        String url = getApiUrl(context);
+        if (url != null && url.endsWith("/")) {
+            return "";
+        }
+        return "/";
     }
 }
