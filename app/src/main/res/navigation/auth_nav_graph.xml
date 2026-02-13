@@ -24,16 +24,6 @@
     </fragment>
     <fragment
         android:id="@+id/AdminDashboardFragment"
-        tools:layout="@layout/admin_dashboard_fragment">
-    </fragment>
-<!--    <fragment-->
-<!--        android:id="@+id/UserDashboardFragment"-->
-<!--        android:name="com.rj.helpdesk.auth.login.SettingsFragment"-->
-<!--        android:label="@string/second_fragment_label"-->
-<!--        tools:layout="@layout/fragment_second">-->
-
-<!--        <action-->
-<!--            android:id="@+id/action_SecondFragment_to_FirstFragment"-->
-<!--            app:destination="@id/FirstFragment" />-->
-<!--    </fragment>-->
+        android:name="com.rj.helpdesk.admin.dashboard.DashboardFragment"
+        tools:layout="@layout/admin_dashboard_fragment"/>
 </navigation>
