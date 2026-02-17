@@ -19,6 +19,20 @@
         app:navGraph="@navigation/admin_nav_graph"/>
 
     <include
+        android:id="@+id/common_global_button"
+        layout="@layout/common_global_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/admin_nav_drawer_layout"
+        layout="@layout/admin_navigation"/>
+    <include
         android:id="@+id/common_global_message"
         layout="@layout/common_global_message"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

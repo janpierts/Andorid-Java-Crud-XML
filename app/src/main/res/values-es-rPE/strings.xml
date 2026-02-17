@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sistema de tickets</string>
+    <string name="action_settings">Configuracion</string>
+    <string name="button_menu_nav_description">Abrir menu</string>
+    <string name="header_title">Titulo Cabecera</string>
+    <string name="header_text">Texto Cabecera</string>
+</resources>

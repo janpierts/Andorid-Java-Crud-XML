@@ -1,5 +1,7 @@
 package com.rj.helpdesk.admin.dashboard;
 
+import static androidx.constraintlayout.widget.ConstraintSet.VISIBLE;
+
 import android.os.Bundle;
 import android.view.View;
 
@@ -25,21 +27,10 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-        // Deshabilitar el título por defecto de la ActionBar para usar el de la Toolbar personalizada
-//        if (getSupportActionBar() != null) {
-//            getSupportActionBar().setDisplayShowTitleEnabled(false);
-//        }
-
         contentBinding = AdminDashboardContentBinding.bind(binding.content.getRoot());
+        setupNavigation();
+        setupGlobalUI();
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment_content_admin_dashboard);
-
-        if (navHostFragment != null) {
-            NavController navController = navHostFragment.getNavController();
-            appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        }
         contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setOnClickListener(v -> {
             contentBinding.commonGlobalMessage.cardGlobalMessage.setVisibility(View.GONE);
         });
@@ -62,5 +53,34 @@ public class DashboardActivity extends AppCompatActivity {
             return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
         }
         return super.onSupportNavigateUp();
+    }
+
+    private void setupNavigation() {
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment_content_admin_dashboard);
+
+        if (navHostFragment != null) {
+            NavController navController = navHostFragment.getNavController();
+            appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        }
+    }
+    private void setupGlobalUI() {
+        if (contentBinding != null) {
+            // Mostrar el botón inmediatamente
+            contentBinding.commonGlobalButton.getRoot().setVisibility(View.VISIBLE);
+
+            contentBinding.commonGlobalButton.getRoot().bringToFront();
+            // Listener para el mensaje global
+            contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setOnClickListener(v -> {
+                contentBinding.commonGlobalMessage.cardGlobalMessage.setVisibility(View.GONE);
+            });
+
+            // Configurar el click del botón global aquí mismo
+            contentBinding.commonGlobalButton.getRoot().setOnClickListener(v -> {
+                // Lógica para cambiar de módulos
+                showGlobalMessage("Módulos", "Aquí puedes cambiar de sección", "Cerrar");
+            });
+        }
     }
 }

@@ -10,12 +10,13 @@
         android:id="@+id/text_dashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
-        android:text="admin dashboard"
+        android:layout_marginTop="260dp"
+        android:text="admin dashboards"
         android:textColor="?attr/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
