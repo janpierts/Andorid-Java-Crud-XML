@@ -5,4 +5,18 @@
     <string name="button_menu_nav_description">Abrir menu</string>
     <string name="header_title">Titulo Cabecera</string>
     <string name="header_text">Texto Cabecera</string>
+    <string name="admin_module_management">Gestion</string>
+    <string name="admin_users">Usuarios</string>
+    <string name="admin_profile">Perfil</string>
+    <string name="admin_settings">Configuracion</string>
+    <string name="admin_users_form_iu_name_editText_hint">Nombres</string>
+    <string name="admin_users_form_iu_email_editText_hint">Correo</string>
+    <string name="btn_admin_users_form_iu_save_text">Guardar</string>
+    <string name="btn_admin_users_form_iu_import_text">Importar</string>
+    <string name="button_close_gm">Cerrar</string>
+    <string name="admin_users_form_iu_title_text">Guardar usuarios</string>
+    <string name="admin_users_form_iu_title_update_text">Actualizar usuario</string>
+    <string name="admin_users_search_hint">Buscar usuarios</string>
+    <string name="admin_label_view_users">Usuarios</string>
+    <string name="admin_label_view_dashboard">Panel de control</string>
 </resources>

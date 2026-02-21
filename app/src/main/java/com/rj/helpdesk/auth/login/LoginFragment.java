@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import com.rj.helpdesk.R;
+import com.rj.helpdesk.admin.AdminActivity;
 import com.rj.helpdesk.databinding.AuthLoginFragmentBinding;
 
 public class LoginFragment extends Fragment {
@@ -24,6 +25,11 @@ public class LoginFragment extends Fragment {
         binding.buttonLogin.setOnClickListener(v -> {
             NavHostFragment.findNavController(LoginFragment.this)
                     .navigate(R.id.action_LoginFragment_to_Admin_Dashboard_Fragment);
+            android.content.Intent intent = new android.content.Intent(requireActivity(), AdminActivity.class);
+            startActivity(intent);
+
+            // 3. Opcional: Cerramos la actividad de Login para que no se pueda regresar
+            requireActivity().finish();
         });
     }
 }

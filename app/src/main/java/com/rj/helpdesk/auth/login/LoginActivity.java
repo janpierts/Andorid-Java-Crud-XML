@@ -43,15 +43,6 @@ public class LoginActivity extends AppCompatActivity {
             NavController navController = navHostFragment.getNavController();
             appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-            // Listener para ocultar/mostrar la Toolbar según el destino
-            navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-                if (destination.getId() == R.id.AdminDashboardFragment || destination.getId() == R.id.UserDashboardFragment) {
-                    binding.toolbar.setVisibility(View.GONE);
-                } else {
-                    binding.toolbar.setVisibility(View.VISIBLE);
-                }
-            });
         }
 
         contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setOnClickListener(v -> {
