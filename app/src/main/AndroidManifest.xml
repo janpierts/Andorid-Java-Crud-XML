@@ -15,7 +15,8 @@
         android:theme="@style/Theme.Helpdesk"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".auth.login.LoginActivity"
+            android:name=".auth.AuthActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

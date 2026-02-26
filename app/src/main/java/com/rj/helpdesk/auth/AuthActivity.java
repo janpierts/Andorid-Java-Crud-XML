@@ -1,4 +1,4 @@
-package com.rj.helpdesk.auth.login;
+package com.rj.helpdesk.auth;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,12 +10,12 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.rj.helpdesk.R;
-import com.rj.helpdesk.common.connections.auth.AuthConnectionManager;
+import com.rj.helpdesk.common.network.auth.AuthConnectionManager;
 import com.rj.helpdesk.common.utils.PreferenceUtils;
 import com.rj.helpdesk.databinding.AuthLoginActivityBinding;
 import com.rj.helpdesk.databinding.AuthLoginContentBinding;
 
-public class LoginActivity extends AppCompatActivity {
+public class AuthActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private AuthLoginActivityBinding binding;
     private AuthLoginContentBinding contentBinding;
@@ -51,6 +51,10 @@ public class LoginActivity extends AppCompatActivity {
 
         contentBinding.cardLoginSettings.buttonSaveLoginSettingsCard.setOnClickListener(v -> {
             String apiUrl = contentBinding.cardLoginSettings.editTextApi.getText().toString();
+            if(!PreferenceUtils.isValidUrl(apiUrl)) {
+                showGlobalMessage("Error", "URL no válida", "Cerrar");
+                return;
+            }
             PreferenceUtils.saveApiUrl(this, apiUrl);
             AuthConnectionManager.testConnection(this,isSuccess -> {
                 if(isSuccess){
