@@ -1,7 +1,9 @@
-package com.rj.helpdesk.common.connections.auth;
+package com.rj.helpdesk.common.network.auth;
 
 import android.content.Context;
-import com.rj.helpdesk.common.connections.RetrofitClient;
+import com.rj.helpdesk.common.network.RetrofitClient;
+import com.rj.helpdesk.common.network.auth.service.AuthService;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -13,12 +15,12 @@ public class AuthConnectionManager {
     }
 
     public static void testConnection(Context context, ConnectionCallback callback) {
-        Driver driver = RetrofitClient.createService(context, Driver.class);
+        AuthService authService = RetrofitClient.createService(context, AuthService.class);
 
-        driver.loginConnect().enqueue(new Callback<Void>() {
+        authService.loginConnect().enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                boolean isOnline = response.isSuccessful() || response.code() == 404;
+                boolean isOnline = /*response.isSuccessful() || */ response.code() == 404;
                 callback.onResult(isOnline);
             }
 

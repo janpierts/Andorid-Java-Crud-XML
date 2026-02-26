@@ -1,4 +1,4 @@
-package com.rj.helpdesk.admin.users;
+package com.rj.helpdesk.common.utils.ui;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -35,7 +34,7 @@ public abstract class SwipeToActionCallback extends ItemTouchHelper.SimpleCallba
 
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-        return false; // No se usa para deslizar
+        return false;
     }
 
     @Override
@@ -47,31 +46,28 @@ public abstract class SwipeToActionCallback extends ItemTouchHelper.SimpleCallba
         int iconTop = itemView.getTop() + (itemView.getHeight() - deleteIcon.getIntrinsicHeight()) / 2;
         int iconBottom = iconTop + deleteIcon.getIntrinsicHeight();
 
-        if (dX > 0) { // Deslizando a la derecha (Actualizar)
+        if (dX > 0) {
             int iconLeft = itemView.getLeft() + iconMargin;
             int iconRight = iconLeft + updateIcon.getIntrinsicWidth();
-            updateIcon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
-
-            backgroundUpdate.setBounds(itemView.getLeft(), itemView.getTop(),
-                    itemView.getLeft() + ((int) dX), itemView.getBottom());
-
+            backgroundUpdate.setBounds(itemView.getLeft(), itemView.getTop(),itemView.getLeft() + ((int) dX-10), itemView.getBottom());
             backgroundUpdate.draw(c);
-            updateIcon.draw(c);
-        } else if (dX < 0) { // Deslizando a la izquierda (Eliminar)
+            if(dX > iconRight-15){
+                updateIcon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+                updateIcon.draw(c);
+            }
+        } else if (dX < 0) {
             int iconLeft = itemView.getRight() - iconMargin - deleteIcon.getIntrinsicWidth();
             int iconRight = itemView.getRight() - iconMargin;
-            deleteIcon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
-
-            backgroundDelete.setBounds(itemView.getRight() + ((int) dX),
-                    itemView.getTop(), itemView.getRight(), itemView.getBottom());
-
+            backgroundDelete.setBounds(itemView.getRight() + ((int) dX+10), itemView.getTop(), itemView.getRight(), itemView.getBottom());
             backgroundDelete.draw(c);
-            deleteIcon.draw(c);
-        } else { // Sin deslizar
+            if(dX < -1*(iconRight-iconLeft+65)){
+                deleteIcon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+                deleteIcon.draw(c);
+            }
+        } else {
             backgroundDelete.setBounds(0, 0, 0, 0);
             backgroundUpdate.setBounds(0, 0, 0, 0);
         }
-
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
     }
 }
