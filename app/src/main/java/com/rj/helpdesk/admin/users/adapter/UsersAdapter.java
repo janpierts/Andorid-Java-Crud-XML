@@ -1,4 +1,4 @@
-package com.rj.helpdesk.admin.users;
+package com.rj.helpdesk.admin.users.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,23 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rj.helpdesk.R;
+import com.rj.helpdesk.common.models.domain.admin.Users;
 
 import java.util.List;
 
-public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHolder> {
-
-    private List<Usuario> usuarios;
-
-    public static class Usuario {
-        public String nombre;
-        public String email;
-        public Usuario(String nombre, String email) {
-            this.nombre = nombre;
-            this.email = email;
-        }
-    }
-
-    public UsuarioAdapter(List<Usuario> usuarios) {
+public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
+    private List<Users> usuarios;
+    public UsersAdapter(List<Users> usuarios) {
         this.usuarios = usuarios;
     }
 
@@ -39,9 +29,9 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Usuario usuario = usuarios.get(position);
-        holder.textViewNombre.setText(usuario.nombre);
-        holder.textViewEmail.setText(usuario.email);
+        Users usuario = usuarios.get(position);
+        holder.textViewNombre.setText(usuario.getNombre());
+        holder.textViewEmail.setText(usuario.getEmail());
     }
 
     @Override

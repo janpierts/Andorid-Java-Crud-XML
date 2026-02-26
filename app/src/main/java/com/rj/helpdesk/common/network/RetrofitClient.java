@@ -1,4 +1,4 @@
-package com.rj.helpdesk.common.connections;
+package com.rj.helpdesk.common.network;
 
 import android.content.Context;
 import com.rj.helpdesk.common.utils.PreferenceUtils;

@@ -1,9 +1,9 @@
-package com.rj.helpdesk.common.connections.auth;
+package com.rj.helpdesk.common.network.auth.service;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface Driver {
+public interface AuthService {
     @GET(".")
     Call<Void> loginConnect();
 }
