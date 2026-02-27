@@ -1,4 +1,4 @@
-package com.rj.helpdesk.admin.users;
+package com.rj.helpdesk.ui.admin.users;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rj.helpdesk.R;
-import com.rj.helpdesk.admin.AdminActivity;
-import com.rj.helpdesk.admin.users.adapter.UsersAdapter;
+import com.rj.helpdesk.ui.admin.AdminActivity;
+import com.rj.helpdesk.ui.admin.users.adapter.UsersAdapter;
 import com.rj.helpdesk.common.models.domain.admin.Users;
 import com.rj.helpdesk.common.network.admin.AdminConnectionManager;
-import com.rj.helpdesk.common.utils.ui.SwipeToActionCallback;
+import com.rj.helpdesk.ui.common.utils.SwipeToActionCallback;
 import com.rj.helpdesk.databinding.AdminUsersFragmentBinding;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

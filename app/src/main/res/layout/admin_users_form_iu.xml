@@ -74,28 +74,26 @@
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
+            android:layout_gravity="center"
             android:weightSum="2">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_admin_users_form_iu_import"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="20dp"
                 android:backgroundTint="#67cbff"
                 android:text="@string/btn_admin_users_form_iu_import_text"
                 app:icon="@android:drawable/ic_menu_upload" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_admin_users_form_iu_save"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="10dp"
                 android:backgroundTint="#4CAF50"
                 android:text="@string/btn_admin_users_form_iu_save_text"
                 app:icon="@android:drawable/ic_menu_save" />
@@ -106,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:text="@string/button_close_gm" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

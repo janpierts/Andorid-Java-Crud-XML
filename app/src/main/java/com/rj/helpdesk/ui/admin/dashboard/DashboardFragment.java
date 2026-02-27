@@ -1,4 +1,4 @@
-package com.rj.helpdesk.admin.dashboard;
+package com.rj.helpdesk.ui.admin.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
