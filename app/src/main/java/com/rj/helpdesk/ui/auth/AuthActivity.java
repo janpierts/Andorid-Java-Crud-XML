@@ -1,4 +1,4 @@
-package com.rj.helpdesk.auth;
+package com.rj.helpdesk.ui.auth;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -46,7 +46,7 @@ public class AuthActivity extends AppCompatActivity {
         }
 
         contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setOnClickListener(v -> {
-            contentBinding.commonGlobalMessage.cardGlobalMessage.setVisibility(View.GONE);
+            contentBinding.commonGlobalMessage.containerGlobalMessage.setVisibility(View.GONE);
         });
 
         contentBinding.cardLoginSettings.buttonSaveLoginSettingsCard.setOnClickListener(v -> {
@@ -78,7 +78,7 @@ public class AuthActivity extends AppCompatActivity {
             contentBinding.commonGlobalMessage.textGlobalTitle.setText(title);
             contentBinding.commonGlobalMessage.textGlobalBody.setText(mssg);
             contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setText(close_name);
-            contentBinding.commonGlobalMessage.cardGlobalMessage.setVisibility(View.VISIBLE);
+            contentBinding.commonGlobalMessage.containerGlobalMessage.setVisibility(View.VISIBLE);
         }
     }
 

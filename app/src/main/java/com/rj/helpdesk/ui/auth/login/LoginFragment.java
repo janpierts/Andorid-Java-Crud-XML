@@ -1,4 +1,4 @@
-package com.rj.helpdesk.auth.login;
+package com.rj.helpdesk.ui.auth.login;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import com.rj.helpdesk.R;
-import com.rj.helpdesk.admin.AdminActivity;
+import com.rj.helpdesk.ui.admin.AdminActivity;
 import com.rj.helpdesk.databinding.AuthLoginFragmentBinding;
 
 public class LoginFragment extends Fragment {
