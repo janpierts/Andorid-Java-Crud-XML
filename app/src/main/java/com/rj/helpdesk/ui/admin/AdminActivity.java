@@ -1,4 +1,4 @@
-package com.rj.helpdesk.admin;
+package com.rj.helpdesk.ui.admin;
 
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +40,7 @@ public class AdminActivity extends AppCompatActivity {
         contentBinding = AdminDashboardContentBinding.bind(binding.content.getRoot());
 
         contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setOnClickListener(v -> {
-            contentBinding.commonGlobalMessage.cardGlobalMessage.setVisibility(View.GONE);
+            contentBinding.commonGlobalMessage.containerGlobalMessage.setVisibility(View.GONE);
         });
     }
 
@@ -49,7 +49,8 @@ public class AdminActivity extends AppCompatActivity {
             contentBinding.commonGlobalMessage.textGlobalTitle.setText(title);
             contentBinding.commonGlobalMessage.textGlobalBody.setText(mssg);
             contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setText(close_name);
-            contentBinding.commonGlobalMessage.cardGlobalMessage.setVisibility(View.VISIBLE);
+            contentBinding.commonGlobalMessage.containerGlobalMessage.setVisibility(View.VISIBLE);
+            contentBinding.commonGlobalMessage.imageView.setVisibility(View.VISIBLE);
         }
     }
 

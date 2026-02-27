@@ -1,4 +1,4 @@
-package com.rj.helpdesk.common.utils.ui;
+package com.rj.helpdesk.ui.common.utils;
 
 import android.content.Context;
 import android.graphics.Canvas;

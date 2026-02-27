@@ -1,4 +1,4 @@
-package com.rj.helpdesk.user.dashboard;
+package com.rj.helpdesk.ui.user.dashboard;
 
 import androidx.fragment.app.Fragment;
 

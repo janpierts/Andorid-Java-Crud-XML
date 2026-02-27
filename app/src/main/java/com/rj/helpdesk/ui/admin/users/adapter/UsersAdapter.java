@@ -1,4 +1,4 @@
-package com.rj.helpdesk.admin.users.adapter;
+package com.rj.helpdesk.ui.admin.users.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
