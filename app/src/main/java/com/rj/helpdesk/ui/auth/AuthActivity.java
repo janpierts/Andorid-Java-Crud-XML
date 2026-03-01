@@ -34,7 +34,7 @@ public class AuthActivity extends AppCompatActivity {
 
         // Cargar API guardada usando Utils
         String savedApi = PreferenceUtils.getApiUrl(this);
-        contentBinding.cardLoginSettings.editTextApi.setText(savedApi);
+        contentBinding.containerApiSettings.editTextApi.setText(savedApi);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment_content_login);
@@ -49,8 +49,8 @@ public class AuthActivity extends AppCompatActivity {
             contentBinding.commonGlobalMessage.containerGlobalMessage.setVisibility(View.GONE);
         });
 
-        contentBinding.cardLoginSettings.buttonSaveLoginSettingsCard.setOnClickListener(v -> {
-            String apiUrl = contentBinding.cardLoginSettings.editTextApi.getText().toString();
+        contentBinding.containerApiSettings.buttonSaveLoginSettingsCard.setOnClickListener(v -> {
+            String apiUrl = contentBinding.containerApiSettings.editTextApi.getText().toString();
             if(!PreferenceUtils.isValidUrl(apiUrl)) {
                 showGlobalMessage("Error", "URL no válida", "Cerrar");
                 return;
@@ -59,16 +59,16 @@ public class AuthActivity extends AppCompatActivity {
             AuthConnectionManager.testConnection(this,isSuccess -> {
                 if(isSuccess){
                     showGlobalMessage("Éxito", "Configuración guardada y API online", "Cerrar");
-                    contentBinding.cardLoginSettings.cardLoginSettings.setVisibility(View.GONE);
+                    contentBinding.containerApiSettings.containerApiSettings.setVisibility(View.GONE);
                 }else{
                     showGlobalMessage("Error", "API no disponible", "Cerrar");
                 }
             });
         });
         
-        if (contentBinding.cardLoginSettings.buttonCloseLoginSettingsCard != null) {
-            contentBinding.cardLoginSettings.buttonCloseLoginSettingsCard.setOnClickListener(v -> {
-                contentBinding.cardLoginSettings.cardLoginSettings.setVisibility(View.GONE);
+        if (contentBinding.containerApiSettings.buttonCloseLoginSettingsCard != null) {
+            contentBinding.containerApiSettings.buttonCloseLoginSettingsCard.setOnClickListener(v -> {
+                contentBinding.containerApiSettings.containerApiSettings.setVisibility(View.GONE);
             });
         }
     }
@@ -92,7 +92,7 @@ public class AuthActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.action_settings){
-            contentBinding.cardLoginSettings.cardLoginSettings.setVisibility(View.VISIBLE);
+            contentBinding.containerApiSettings.containerApiSettings.setVisibility(View.VISIBLE);
             return true;
         }
         return super.onOptionsItemSelected(item);
