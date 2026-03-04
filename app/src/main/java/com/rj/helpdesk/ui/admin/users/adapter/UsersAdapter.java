@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.rj.helpdesk.R;
 import com.rj.helpdesk.common.models.domain.admin.Users;
 
+import java.text.BreakIterator;
 import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
@@ -32,6 +33,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         Users usuario = usuarios.get(position);
         holder.textViewNombre.setText(usuario.getNombre());
         holder.textViewEmail.setText(usuario.getEmail());
+        holder.textViewCreated.setText(usuario.getCreated());
+        holder.textViewUpdated.setText(usuario.getUpdated());
     }
 
     @Override
@@ -42,11 +45,15 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewNombre;
         public TextView textViewEmail;
+        public TextView textViewCreated;
+        public TextView textViewUpdated;
 
         public ViewHolder(View view) {
             super(view);
             textViewNombre = view.findViewById(R.id.admin_users_textViewNombre);
             textViewEmail = view.findViewById(R.id.admin_users_textViewEmail);
+            textViewCreated = view.findViewById(R.id.admin_users_textViewCreated);
+            textViewUpdated = view.findViewById(R.id.admin_users_textViewUpdated);
         }
     }
 }

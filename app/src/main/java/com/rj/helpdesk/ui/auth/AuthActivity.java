@@ -45,39 +45,53 @@ public class AuthActivity extends AppCompatActivity {
             NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         }
 
-        contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setOnClickListener(v -> {
-            contentBinding.commonGlobalMessage.containerGlobalMessage.setVisibility(View.GONE);
-        });
-
         contentBinding.containerApiSettings.buttonSaveLoginSettingsCard.setOnClickListener(v -> {
             String apiUrl = contentBinding.containerApiSettings.editTextApi.getText().toString();
             if(!PreferenceUtils.isValidUrl(apiUrl)) {
-                showGlobalMessage("Error", "URL no válida", "Cerrar");
+                showGlobalMessage("Error", "URL no válida", "Cerrar",false,"","ic_error",null);
                 return;
             }
-            PreferenceUtils.saveApiUrl(this, apiUrl);
-            AuthConnectionManager.testConnection(this,isSuccess -> {
-                if(isSuccess){
-                    showGlobalMessage("Éxito", "Configuración guardada y API online", "Cerrar");
-                    contentBinding.containerApiSettings.containerApiSettings.setVisibility(View.GONE);
-                }else{
-                    showGlobalMessage("Error", "API no disponible", "Cerrar");
-                }
+            showGlobalMessage("Guardar API", "Desea guardar la configuración?", "Cerrar",true,"Entendido","ic_warn", () -> {
+                PreferenceUtils.saveApiUrl(this, apiUrl);
+                AuthConnectionManager.testConnection(this, isSuccess -> {
+                    if (isSuccess) {
+                        showGlobalMessage("Éxito", "Configuración guardada y API online", "Entendido", false, "", "ic_renew",null);
+                        contentBinding.containerApiSettings.containerApiSettings.setVisibility(View.GONE);
+                    } else {
+                        showGlobalMessage("Error", "API no disponible", "Cerrar", false, "", "ic_error",null);
+                    }
+                });
             });
         });
-        
-        if (contentBinding.containerApiSettings.buttonCloseLoginSettingsCard != null) {
-            contentBinding.containerApiSettings.buttonCloseLoginSettingsCard.setOnClickListener(v -> {
-                contentBinding.containerApiSettings.containerApiSettings.setVisibility(View.GONE);
-            });
-        }
+        contentBinding.containerApiSettings.buttonCloseLoginSettingsCard.setOnClickListener(v -> {
+            contentBinding.containerApiSettings.containerApiSettings.setVisibility(View.GONE);
+        });
     }
-
-    public void showGlobalMessage(String title, String mssg, String close_name){
+    public interface OnMessageClickListener {
+        void onConfirm();
+    }
+    public void showGlobalMessage(String title, String mssg, String close_name, boolean option, String option_name, String image, OnMessageClickListener listener){
         if(contentBinding != null){
+            int resId = getResources().getIdentifier(image, "drawable", getPackageName());
+            if (resId != 0) {
+                contentBinding.commonGlobalMessage.imageView.setImageResource(resId);
+            } else {
+                contentBinding.commonGlobalMessage.imageView.setImageResource(R.drawable.ic_error);
+            }
             contentBinding.commonGlobalMessage.textGlobalTitle.setText(title);
             contentBinding.commonGlobalMessage.textGlobalBody.setText(mssg);
             contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setText(close_name);
+            contentBinding.commonGlobalMessage.buttonOptionGlobalCard.setText(option?option_name:"");
+            contentBinding.commonGlobalMessage.buttonOptionGlobalCard.setVisibility(option?View.VISIBLE:View.GONE);
+            if(option){
+                contentBinding.commonGlobalMessage.buttonOptionGlobalCard.setOnClickListener(v -> {
+                    contentBinding.commonGlobalMessage.containerGlobalMessage.setVisibility(View.GONE);
+                    if(listener != null) listener.onConfirm();
+                });
+            }
+            contentBinding.commonGlobalMessage.buttonCloseGlobalCard.setOnClickListener(v -> {
+                contentBinding.commonGlobalMessage.containerGlobalMessage.setVisibility(View.GONE);
+            });
             contentBinding.commonGlobalMessage.containerGlobalMessage.setVisibility(View.VISIBLE);
         }
     }

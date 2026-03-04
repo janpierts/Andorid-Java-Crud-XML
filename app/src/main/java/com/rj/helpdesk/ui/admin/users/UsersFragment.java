@@ -6,7 +6,6 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.rj.helpdesk.R;
 import com.rj.helpdesk.ui.admin.AdminActivity;
 import com.rj.helpdesk.ui.admin.users.adapter.UsersAdapter;
@@ -19,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,17 +63,19 @@ public class UsersFragment extends Fragment {
             binding.formIu.btnAdminUsersFormIuImport.setVisibility(View.VISIBLE);
             binding.formIu.adminUsersFormIuNameEditText.setText("");
             binding.formIu.adminUsersFormIuEmailEditText.setText("");
-            binding.formIu.adminUsersCardFormIu.setVisibility(View.VISIBLE);
+            binding.formIu.containerAdminUsersCardFormIu.setVisibility(View.VISIBLE);
         });
 
         binding.formIu.btnCloseFormIu.setOnClickListener(v -> {
-            binding.formIu.adminUsersCardFormIu.setVisibility(View.GONE);
+            binding.formIu.containerAdminUsersCardFormIu.setVisibility(View.GONE);
         });
 
         binding.formIu.btnAdminUsersFormIuSave.setOnClickListener(v -> {
-            binding.formIu.adminUsersCardFormIu.setVisibility(View.GONE);
+            binding.formIu.containerAdminUsersCardFormIu.setVisibility(View.GONE);
             if (getActivity() instanceof AdminActivity) {
-                ((AdminActivity) getActivity()).showGlobalMessage("Éxito", "Usuario procesado correctamente","Cerrar");
+                ((AdminActivity) getActivity()).showGlobalMessage("Actualizar registro",  "Desea actualizar el registro?","Cerrar", true, "Entendido", "ic_warn", () -> {
+                    ((AdminActivity) getActivity()).showGlobalMessage("Éxito", "Usuario procesado correctamente", "Cerrar",false,"","ic_success",null);
+                });
             }
         });
     }
@@ -97,7 +97,7 @@ public class UsersFragment extends Fragment {
             public void onError(String message) {
                 binding.swipeRefreshLayout.setRefreshing(false);
                 if (getActivity() instanceof AdminActivity) {
-                    ((AdminActivity) getActivity()).showGlobalMessage("Error", message, "Entendido");
+                    ((AdminActivity) getActivity()).showGlobalMessage("Error", message, "Entendido",false,"","ic_error",null);
                 }
             }
         });
@@ -111,10 +111,13 @@ public class UsersFragment extends Fragment {
                 Users usuario = listaUsuarios.get(position);
 
                 if (direction == ItemTouchHelper.LEFT) {
-                    listaUsuarios.remove(position);
-                    adapter.notifyItemRemoved(position);
                     if (getActivity() instanceof AdminActivity) {
-                        ((AdminActivity) getActivity()).showGlobalMessage("Eliminado",  " ha sido borrado.","Cerrar");
+                        ((AdminActivity) getActivity()).showGlobalMessage("Anular registro",  "Desea eliminar el registro?","Cerrar", true, "Entendido", "ic_delete_question", () -> {
+                            listaUsuarios.remove(position);
+                            adapter.notifyItemRemoved(position);
+                            ((AdminActivity) getActivity()).showGlobalMessage("Anular registro",  "Registro eliminado","Entendido", false, "", "ic_delete_confirm",null);
+                        });
+                        adapter.notifyItemChanged(position);
                     }
                 } else if (direction == ItemTouchHelper.RIGHT) {
                     adapter.notifyItemChanged(position);
@@ -122,11 +125,10 @@ public class UsersFragment extends Fragment {
                     binding.formIu.btnAdminUsersFormIuImport.setVisibility(View.GONE);
                     binding.formIu.adminUsersFormIuNameEditText.setText(usuario.getNombre());
                     binding.formIu.adminUsersFormIuEmailEditText.setText(usuario.getEmail());
-                    binding.formIu.adminUsersCardFormIu.setVisibility(View.VISIBLE);
+                    binding.formIu.containerAdminUsersCardFormIu.setVisibility(View.VISIBLE);
                 }
             }
         };
-
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeCallback);
         itemTouchHelper.attachToRecyclerView(binding.adminUsersRecyclerView);
     }

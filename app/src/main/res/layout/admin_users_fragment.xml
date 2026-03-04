@@ -54,8 +54,7 @@
 
     <include
         android:id="@+id/form_iu"
-        layout="@layout/admin_users_form_iu"
-        />
+        layout="@layout/admin_users_form_iu"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_iu_user"

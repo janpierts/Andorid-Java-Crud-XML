@@ -9,7 +9,7 @@ import java.util.List;
 public class UsersMappers {
     public static Users toDomain(UsersEntityDTO dto) {
         if (dto == null) return null;
-        return new Users(dto.name, dto.email);
+        return new Users(dto.Id, dto.name, dto.email, dto.created, dto.updated, dto.state);
     }
 
     // Convierte una lista completa (útil para el ListAllUsers)
